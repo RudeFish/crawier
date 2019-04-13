@@ -14,17 +14,17 @@ func ParseCityList(contents []byte) engine.ParseResult  {
 	matches := re.FindAllSubmatch(contents, -1)
 
 	result := engine.ParseResult{}
-	limit := 1
+	//limit := 10
 	for _, i := range matches {
 		// 将城市名称放到resule
 		result.Items = append(result.Items, string(i[2]))
 		result.Request = append(result.Request, engine.Request{string(i[1]), ParseCity})
 		//fmt.Printf("City: %-8s, URL: %s \n", i[2], i[1])
 		// 控制爬取的页面数
-		limit--
-		if limit == 0 {
-			break
-		}
+		//limit--
+		//if limit == 0 {
+		//	break
+		//}
 	}
 	return result
 	//fmt.Println(len(find))

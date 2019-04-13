@@ -14,12 +14,13 @@ func ParseCity(content []byte) engine.ParseResult {
 
 	results := engine.ParseResult{}
 	for _, m := range matchs {
-		results.Items = append(results.Items, "User " + string(m[2]))
+		name := string(m[2])
+		results.Items = append(results.Items, "User " + name)
 		//results.Request = append(results.Request, engine.Request{string(m[1]), engine.NilParser})
 		// 将用户名从此处传到ParseProfile中，不改变原来结构需用到匿名函数
 		results.Request = append(results.Request, engine.Request{Url: string(m[1]),
 			ParserFunc: func(bytes []byte) engine.ParseResult {
-				return ParseProfile(bytes, string(m[2]))
+				return ParseProfile(bytes, name)
 				},
 		})
 
